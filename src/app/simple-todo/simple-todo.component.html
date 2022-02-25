@@ -1,0 +1,63 @@
+<ng-container>
+    <div class="center">
+      <div class="field">
+        <mat-card>
+          <mat-card-title>To do list..</mat-card-title>
+          <mat-card-subtitle> the <b>list</b> that tells you what you need to do..</mat-card-subtitle>
+          <mat-card-content>
+            <mat-form-field class="content" appearance="fill">
+              <mat-label>Type what you need to do...</mat-label>
+              <input matInput type="text" [(ngModel)]="value">
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+              </button>
+  
+            </mat-form-field>
+  
+            <button mat-mini-fab color="primary" (click)="create()">
+              <mat-icon>done</mat-icon>
+            </button>
+  
+            <!-- <button mat-button>ADD</button> -->
+          </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card *ngIf="todolist.length >0">
+          <div *ngIf="incomplist.length >0">
+            <mat-list role="list">
+              <div mat-subheader>Incompleted</div>
+              <mat-list-item class="list-item" *ngFor="let todo of incomplist">
+  
+                <div mat-line>
+                  <mat-checkbox (click)="toggleStatus(todo)" [(ngModel)]="todo.completed" color="primary">{{todo.text}}</mat-checkbox>
+                </div>
+                <mat-action-list>
+                  <button mat-mini-fab color="primary" (click)="delete(todo)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-action-list>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <div *ngIf="complist.length >0">
+          <mat-list role="list">
+            <div mat-subheader>Completed</div>
+            <mat-list-item class="list-item" *ngFor="let todo of complist">
+  
+              <div mat-line>
+                <mat-checkbox (click)="toggleStatus(todo)" [(ngModel)]="todo.completed" color="primary"><span class="completed"><del>{{todo.text}}</del></span></mat-checkbox>
+              </div>
+              <mat-action-list>
+                <button mat-mini-fab color="secondary" (click)="delete(todo)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-action-list>
+            </mat-list-item>
+          </mat-list>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </ng-container>
+  
+  
